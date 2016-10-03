@@ -4,9 +4,8 @@
 # authors: scossar
 
 after_initialize do
-  require_dependency 'app/services/user_activator'
 
-  EmailActivator.class_eval do
+  UserActivator::EmailActivator.class_eval do
     def activate
       email_token = user.email_tokens.unconfirmed.active.first
       email_token = user.email_tokens.create(email: user.email) if email_token.nil?
